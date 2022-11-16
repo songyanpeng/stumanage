@@ -1,0 +1,79 @@
+{% extends "student/base.html" %}
+
+{% block content %}
+    <section class="forms">
+        <div class="col-md-10">
+            <div class="card">
+                <div class="card-header d-flex align-items-center">
+                    <h4>编辑学生信息</h4>
+                </div>
+                <div class="card-body">
+                    <form action="" method="post">
+                        <div class="form-group">
+                            <label>姓名</label>
+                            <input type="text" value="{{ edit_stu.name }}" placeholder="Name" class="form-control"
+                                   name="name">
+                        </div>
+                        <div class="form-group">
+                            <label>年龄</label>
+                            <input type="text" value="{{ edit_stu.age }}" placeholder="Age" class="form-control"
+                                   name="age">
+                        </div>
+                        <div class="form-group">
+                            <label>性别</label>
+                            <select name="sex" id="" class="form-control">
+                                {% if edit_stu.sex == 1 %}
+                                    <option value="1" selected>男</option>
+                                    <option value="0">女</option>
+                                    <option value="2">保密</option>
+                                {% elif edit_stu.sex == 0 %}
+                                    <option value="1">男</option>
+                                    <option value="0" selected>女</option>
+                                    <option value="2">保密</option>
+                                {% else %}
+                                    <option value="1">男</option>
+                                    <option value="0">女</option>
+                                    <option value="2" selected>保密</option>
+                                {% endif %}
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>生日</label>
+                            <input name="birthday" value="{{ edit_stu.birthday|date:'Y-m-d' }}" type="date"
+                                   placeholder="Birthday" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label>电话</label>
+                            <input name='tel' value="{{ edit_stu.tel }}" type="text" placeholder="Telephone Number"
+                                   class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label>家庭住址</label>
+                            <input type="text" value="{{ edit_stu.addr }}" placeholder="Address" class="form-control"
+                                   name="addr">
+                        </div>
+
+                        <div class="form-group">
+                            <label>班级</label>
+                            <select name="clas_id" id="" class="form-control">
+                                {% for class in class_list %}
+                                    {% if class == edit_stu.clas %}
+                                        <option selected value="{{ class.id }}">{{ class.name }}</option>
+                                    {% else %}
+                                        <option value="{{ class.id }}">{{ class.name }}</option>
+                                    {% endif %}
+                                {% endfor %}
+                            </select>
+                        </div>
+
+
+                        <div class="form-group">
+                            <input type="submit" value="修改" class="btn btn-primary">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock content %}
